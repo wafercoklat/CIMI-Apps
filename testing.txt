@@ -1,0 +1,8 @@
+testing 
+1. Buat biasa dlu untuk 1 partai
+2. Buat penjadwalan tapi 2 PL
+
+
+Error
+1. Kalau isotank sudah dipakai maka isotank tidak bisa di pakai untuk on schedule berikutnya.
+hal ini dikarena kan ada suspend, jika isotank tidak ter approve, maka isotank tersuspend.

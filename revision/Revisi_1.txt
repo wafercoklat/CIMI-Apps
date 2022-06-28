@@ -1,0 +1,16 @@
+10 Mei 2022
+- ISO/0001/22 ganti 0001/J/22 
+- Tujuan di ganti jadi Rute JKT - {Nama Depo} to SBY - {Nama Depo} -> done
+- Last Location (untuk semua kolom) -> done
+- Isotank Origin ganti ke Tujuan Location -> done
+- Jumlah Partai tambahkan di modul
+- tanggal di bawah tidak boleh lebih kecil dari tanggal outdepo
+- apps.cakraindo.com/isotank/edit/1 - tidak bisa encrypst -> done
+- duplicate (customer berubah) -> need check
+
+Testing
+Duplicate
+- Duplicate On Schedule
+- Duplicate in Use
+- Duplicate Suspend
+- Duplicate in Use - On Schedule
