@@ -122,6 +122,8 @@ class IsotankController extends Controller
             $iso->uid = $uid;
             $iso->save();
 
+            DB::table('tr_isotank')->where('packinglist_no', $request->PL)->update(['jlh_Partai' => $request->jlhpartai, 'packinglist_no' => $request->PL]);
+
             if ($request->duplicate == 'on') {
                 return $this->duplicateSetValue(encrypt($uid))->with('duplicate', '-');;
             }
@@ -213,8 +215,8 @@ class IsotankController extends Controller
         $Utrans->tgl_indepo_real = $request->tgl_indepo_real;
         $Utrans->transport_no = $request->notransport;
         $Utrans->tgl_muat = $request->tgl_muat;
-        $Utrans->tgl_ETD = $request->tgl_etd;
-        $Utrans->tgl_ETA = $request->tgl_eta;
+        $Utrans->tgl_ETD = $request->tgl_ETD;
+        $Utrans->tgl_ETA = $request->tgl_ETA;
         $Utrans->tgl_bongkar = $request->tgl_bongkar;
         $Utrans->update();
 
@@ -258,8 +260,8 @@ class IsotankController extends Controller
         return view('partial.barang.isotank.view_trans_det', compact('iso'));
     }
 
-    public function exportTransaksiIsotank(){
-        return Excel::download(new Laporan_Penjadwalan, 'Laporan-Penjadwalan.xlsx');
+    public function exportTransaksiIsotank($tgl1, $tgl2, $loc, $stats){
+        return Excel::download(new Laporan_Penjadwalan($tgl1, $tgl2, $loc, $stats), 'Laporan-Penjadwalan.xlsx');
     }
 
     public function void(Request $req, $id){

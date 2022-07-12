@@ -29,7 +29,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                            <div class="col-lg-3 col-md-12 col-sm-12" id="disable3-">
                                                 <h5 class="card-title">Pilih Jadwal</h5>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group"> <label for="exampleInputName1">Tanggal OutDepo*</label> <input type="date" class="form-control fix1 p-hor" id="startDate" placeholder="start" id="outdepo" name="outdepo"> </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group">
@@ -65,15 +65,15 @@
                                                     <div class="form-group">
                                                         <hr class="my-2 devider"> </div>
                                                     <div class="row col-lg-12 col-md-12 col-sm-12 mr-2">
-                                                        <div class="form-group col-lg-3"> <label for="exampleInputName1">Tanggal Muat / Loading</label> <input type="date" class="form-control fix1" id="exampleInputName1" placeholder="start" name="tgl_muat"> </div>
+                                                        <div class="form-group col-lg-3"> <label for="exampleInputName1">Tanggal Muat / Loading</label> <input type="date" class="form-control fix1" id="limitaddisotank1" placeholder="start" name="tgl_muat"> </div>
+                                                        <div class="form-group col-lg-3"> 
+                                                            <label for="exampleInputName1">Tanggal ETD</label> <input type="date" class="form-control fix1" id="limitaddisotank2" placeholder="start" name="tgl_etd"> </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label for="exampleInputName1">Tanggal ETD</label> <input type="date" class="form-control fix1" id="exampleInputName1" placeholder="start" name="tgl_etd"> </div>
+                                                            <label for="exampleInputName1">Tanggal ETA</label> <input type="date" class="form-control fix1" id="limitaddisotank3" placeholder="start" name="tgl_eta"> </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label for="exampleInputName1">Tanggal ETA</label> <input type="date" class="form-control fix1" id="exampleInputName1" placeholder="start" name="tgl_eta"> </div>
+                                                            <label for="exampleInputName1">Tanggal Bongkar / Dooring</label> <input type="date" class="form-control fix1" id="limitaddisotank4" placeholder="start" name="tgl_bongkar"> </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label for="exampleInputName1">Tanggal Bongkar / Dooring</label> <input type="date" class="form-control fix1" id="exampleInputName1" placeholder="start" name="tgl_bongkar"> </div>
-                                                        <div class="form-group col-lg-3">
-                                                            <label for="exampleInputName1">Tanggal InDepo</label> <input type="date" class="form-control fix1" id="exampleInputName1" placeholder="start" name="tgl_indepo"> </div>
+                                                            <label for="exampleInputName1">Tanggal InDepo</label> <input type="date" class="form-control fix1" id="limitaddisotank5" placeholder="start" name="tgl_indepo_real"> </div>
                                                     </div>
                                                 </div>
                                             </div>

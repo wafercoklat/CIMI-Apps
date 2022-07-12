@@ -10,6 +10,10 @@
         window.location.href = "file:///F:/pdf2.pdf";
     }
 
+    function isEmpty(value) {
+        return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
+      }
+
     function isUrl(path, url) {
         return url.includes(path) ? true : false;
         // return (window.location.href.indexOf(path + parseInt(url)) > -1) ? true : false;
@@ -33,16 +37,15 @@
     };
 
     function loadiso(start, end, loc, target) {
-        console.log(start + '' + end + '' + loc);
         $.ajax({
             url: '/isotank/checkiso/' + start + '/' + end + '/' + loc,
             type: 'GET',
             dataType: 'Json',
             success: function(data) {
+                console.log("TEST")
                 if (data == '') {
                     setOptionIso(target, [], 'Isotank tidak ada')
                 } else {
-
                     setOptionIso(target, PushOptions(data), 'Pilih Isotank');
                 }
             },
@@ -97,20 +100,37 @@
     // VIEW =============================
     // CREATE ISOTANK
     TEMP.Loadisotank = function() {
+        var origin, des;
         start = $('#startDate').val();
         end = $('#endDate').val();
         $('#endDate').on('change', function() { end = $('#endDate').val(); });
         $('#startDate').on('change', function() { start = $('#startDate').val(); });
 
         $document.on('click', '#checkISO', function() {
-            if (start != undefined || end != undefined) {
-                document.getElementById('disable-').style.pointerEvents = 'visible';
-                document.getElementById('disable-').style.opacity = '1';
-                document.getElementById('disable2-').style.pointerEvents = 'visible';
-                document.getElementById('disable2-').style.opacity = '1';
-                $("#isotank").selectize()[0].selectize.destroy();
-                loadiso(start, end, $('#origin').val(), '#isotank');
-            } else { alert('tanggal kosong'); }
+            origin = $('#origin').val();
+            des = $('#destinasi').val();
+
+            switch (true) {
+                case (start == undefined && end == undefined):
+                    alert('Tanggal kosong');
+                    break;
+                case (!origin.trim()):
+                    alert('Origin kosong');
+                    break;
+                case (!des.trim()):
+                    alert('Destinasi kosong');
+                    break;
+                case (start != undefined && end != undefined && !!origin.trim() && !!des.trim()):
+                    document.getElementById('disable-').style.pointerEvents = 'visible';
+                    document.getElementById('disable-').style.opacity = '1';
+                    document.getElementById('disable2-').style.pointerEvents = 'visible';
+                    document.getElementById('disable2-').style.opacity = '1';
+                    $("#isotank").selectize()[0].selectize.destroy();
+                    loadiso(start, end, $('#origin').val(), '#isotank');
+                    break;
+                default:
+                    return alert('tanggal kosong');
+            }
         });
     };
 
@@ -123,16 +143,30 @@
     };
 
     TEMP.Loadisotank_II = function() {
-        start = $('#startDate_').val();
-        end = $('#endDate_').val();
         $('#endDate_').on('change', function() { end = $('#endDate_').val(); });
         $('#startDate_').on('change', function() { start = $('#startDate_').val(); });
 
         $document.on('click', '#checkISO_', function() {
-            if (start != undefined || end != undefined) {
-                $('#select_opt_isotank').selectize()[0].selectize.destroy();
-                loadiso(start, end, $('#select_opt_origin').val(), '#select_opt_isotank');
-            } else { alert('tanggal kosong'); }
+            start = $('#startDate_').val();
+            end = $('#endDate_').val();
+
+            switch (true) {
+                case (start == undefined && end == undefined):
+                    alert('Tanggal kosong');
+                    break;
+                case (!origin.trim()):
+                    alert('Origin kosong');
+                    break;
+                case (!des.trim()):
+                    alert('Destinasi kosong');
+                    break;
+                case (start != undefined && end != undefined && !!origin.trim() && !!des.trim()):
+                    $('#select_opt_isotank').selectize()[0].selectize.destroy();
+                    loadiso(start, end, $('#select_opt_origin').val(), '#select_opt_isotank');
+                    break;
+                default:
+                    return;
+            }
         });
     };
 
@@ -417,8 +451,8 @@
             swal({
                 position: 'center',
                 icon: 'success',
-                title: 'Replika Berhasil',
-                text: 'Isotank berhasil direplika dan berhasil dijadwalkan',
+                title: 'Duplicate Berhasil',
+                text: 'Isotank berhasil diduplicate dan berhasil dijadwalkan',
                 showConfirmButton: false,
                 timer: 10000
             })
@@ -515,40 +549,48 @@
     }
 
     TEMP.LimitDateEdit = function() {
-        var minDates = $('#startDate_').val();
-        $('#limitdate1').on('change', function() {
-            if ($('#limitdate1').val() < minDates) {
-                alert("Tanggal tidak boleh di bawah " + minDates);
-                $('#limitdate1').val(minDates);
-            }
-        });
+        var limitdate = function (date, dateby) {
+            $(dateby).on('change', function() {
+                if ($(date).val() <= $(dateby).val()) {
+                    $(date).val($(dateby).val());
+                }
+            });
 
-        $('#limitdate2').on('change', function() {
-            if ($('#limitdate2').val() < minDates) {
-                alert("Tanggal tidak boleh di bawah " + minDates);
-                $('#limitdate2').val(minDates);
-            }
-        });
+            $(date).on('change', function() {
+                if ($(date).val() < $(dateby).val()) {
+                    alert("Tanggal tidak boleh di bawah " + $(dateby).val());
+                    $(date).val($(dateby).val());
+                }
+            });
+        }
 
-        $('#limitdate3').on('change', function() {
-            if ($('#limitdate3').val() < minDates) {
-                alert("Tanggal tidak boleh di bawah " + minDates);
-                $('#limitdate3').val(minDates);
-            }
-        });
+        limitdate('#limitdate1','#startDate_');
+        limitdate('#limitdate2','#startDate_');
+        limitdate('#limitdate3','#startDate_');
+        limitdate('#limitdate4','#startDate_');
+        limitdate('#limitdate5','#startDate_');
+        limitdate('#limitaddisotank1','#startDate');
+        limitdate('#limitaddisotank2','#startDate');
+        limitdate('#limitaddisotank3','#startDate');
+        limitdate('#limitaddisotank4','#startDate');
+        limitdate('#limitaddisotank5','#startDate');
+        limitdate('#endDate','#startDate');
+        limitdate('#limitdupisotank1','#startDate_');
+        limitdate('#limitdupisotank2','#startDate_');
+        limitdate('#limitdupisotank3','#startDate_');
+        limitdate('#limitdupisotank4','#startDate_');
+        limitdate('#limitdupisotank5','#startDate_');
+        limitdate('#limitdupisotank6','#startDate_');
+        limitdate('#endDate_','#startDate_');
+    }
 
-        $('#limitdate4').on('change', function() {
-            if ($('#limitdate4').val() < minDates) {
-                alert("Tanggal tidak boleh di bawah " + minDates);
-                $('#limitdate4').val(minDates);
-            }
-        });
-
-        $('#limitdate5').on('change', function() {
-            if ($('#limitdate5').val() < minDates) {
-                alert("Tanggal tidak boleh di bawah " + minDates);
-                $('#limitdate5').val(minDates);
-            }
+    TEMP.CheckIfstartenddate_change = function () {
+        var check = function(arg){
+            if($(arg).length){ $(arg).trigger("click");} 
+        }
+        $('#startDate, #endDate, #startDate_, #endDate_').on('change', function() {
+           check('#checkISO_');
+           check('#checkISO');
         });
     }
 
@@ -567,6 +609,18 @@
         }); 
     }
 
+    TEMP.Export = function(){
+        $document.on('click', '#export', function(e) {
+            e.preventDefault(); 
+            var tgl1 = isEmpty($('#min').val()) ? 'NULL' : $('#min').val();
+            var tgl2 = isEmpty($('#max').val()) ? 'NULL' : $('#max').val();
+            var loc = isEmpty($('#loc-filter').val()) ?  'NULL' : $('#loc-filter').val();
+            var stats = isEmpty($('#stats-filter').val()) ? 'NULL' : $('#stats-filter').val();
+
+            window.location.href = "/isotank/transaksi/export-excel/"+tgl1+"/"+tgl2+"/"+loc+"/"+stats;
+        });
+    }
+
     $document.ready(function() {
         isUrl('isotank/info/', urls) ? TEMP.fetchMonthly() : TEMP.Loadisotank(),
             isUrl('isotank/create', urls) ? TEMP.SelectItem() : TEMP.SelectItem_II(),
@@ -574,6 +628,8 @@
             TEMP.LimitDateEdit(),
             TEMP.Alert(),
             TEMP.ValidationForm(),
-            TEMP.Loadisotank_II()
+            TEMP.Loadisotank_II(),
+            TEMP.Export(),
+            TEMP.CheckIfstartenddate_change()
     });
 })(jQuery);

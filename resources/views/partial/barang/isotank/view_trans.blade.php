@@ -11,9 +11,9 @@
                             </div>
                             <div class="row"> 
                                 <div class="mb-2 col-lg-2 col-md-6 col-sm-12">
-                                    <a class="btn btn-success btn-block col-12" type="button" href="{{ route('isotank.export') }}" name="filter" id="filter" style="margin-top: 10px" target="_blank">
+                                    <button class="btn btn-success btn-block col-12" name="filter" id="export" style="margin-top: 10px" target="_blank">
                                         <i class="fa fa-filter"></i> Export Transaksi
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="form-group col-lg-2 col-md-6 col-sm-12">
                                     <label class="filter-set">Tanggal Awal</label>
@@ -45,11 +45,11 @@
                                         <option value="Finish">Finish</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-lg-2 col-md-6 col-sm-12">
+                                {{-- <div class="form-group col-lg-2 col-md-6 col-sm-12">
                                     <label class="filter-set">Pencarian</label>
                                     <br>
                                     <input class="clearable col-12" type="text" id="search-filter" class="form-control filter-set" aria-label="Pencarian">
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <table class="table table-hover pb-2" width="100%" id="datatable">

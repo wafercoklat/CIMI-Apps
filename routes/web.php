@@ -47,10 +47,11 @@ Route::get('/', [PortalController::class, 'loginBase']);
                 Route::put('/isotank/updateIsotank/{id}', [IsotankController::class, 'updateModal']);
                 Route::get('/isotank/duplicate/{id}', [IsotankController::class, 'duplicateSetValue'])->name('duplicateSetValue');
                 Route::put('/isotank/void/{id}', [IsotankController::class, 'void'])->name('isotank.void');
-                Route::get('/isotank/transaksi/export-excel', [IsotankController::class, 'exportTransaksiIsotank'])->name('isotank.export');
-
+                
+                // All Transaction
                 Route::get('/isotank/transaksi/all', [IsotankController::class, 'transaksiIsotank'])->name('isotank.transaksi');
                 Route::get('/isotank/transaksi/detail/{packinglist}', [IsotankController::class, 'transaksiIsotankDetail'])->name('isotank.transaksidet');
+                Route::get('/isotank/transaksi/export-excel/{tgl1}/{tgl2}/{loc}/{stats}', [IsotankController::class, 'exportTransaksiIsotank'])->name('isotank.export');
 
             // Master Data
                 Route::get('/master/data/user', [MasterDataController::class, 'dataUser'])->name('masterdata.user');

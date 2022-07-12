@@ -6,3 +6,20 @@ testing
 Error
 1. Kalau isotank sudah dipakai maka isotank tidak bisa di pakai untuk on schedule berikutnya.
 hal ini dikarena kan ada suspend, jika isotank tidak ter approve, maka isotank tersuspend.
+
+
+30 Juni 2022
+- ETD - ETA Belum di kunci (DONE)
+- Tinggal InDepo tidak otomatis (DONE)
+- Biar user update 
+- Lokasi Isotank kalau sudah ETA (kecuali Ready) ikut Destinasi (DONE)
+- Transaksi ISO -> PL (Trus munculin PL) (DONE)
+- Tanggal tidak boleh kurang dari tanggal out depo\ (DONE)
+- Duplicate tidak tarik data (DONE)
+- Customer ikut ascend
+- Laporan ikut tanggal mulai (DONE)
+- Status, No. Isotank, Transaksi, Tgl OutDepo, Tgl InDepo, Lokasi Isotank, Rute, Pelanggan, Lokasi, Loading (DONE)	
+
+11 Juli 2022
+- Bagaimana cara lihat yang in use - onschedule?
+- Bagaimana setelah tombol check ditekan, user tiba2 ganti tanggal 

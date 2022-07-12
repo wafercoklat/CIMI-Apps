@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-6 col-sm-12">
                             <a class="btn btn-success btn-block col-12" type="button" href="{{ route('duplicateSetValue', Crypt::encrypt($iso[0]->uid)) }}" name="filter" id="filter"  style="margin-top:10px" target="_blank">
-                                <i class="fa fa-filter"></i> Buat Jadwal
+                                <i class="fa fa-filter"></i> Duplicate Jadwal
                             </a>
                         </div>
                         <div class="form-group col-lg-1">
@@ -47,8 +47,8 @@
                                 <tbody>
                                     @foreach ($iso as $iso)
                                     <tr @if ($iso->stats == 'Void') class="strikeout" @endif>
-                                        <td>{{$iso->stats}}</td>
-                                        <td><a href="#" type="button" data-target="#modalshow{{$iso->transid}}" data-toggle="modal"><span class="badge  bg-info">{{$iso->transnumber}} <i class="mdi mdi-arrow-right"></i></span></a></td>
+                                        <td><a href="#" type="button" data-target="#modalshow{{$iso->transid}}" data-toggle="modal"><span class="badge  bg-info">{{$iso->stats}}</a></td>
+                                        <td>{{$iso->transnumber}}</td>
                                         <td>{{$iso->code}}</td>
                                         <td>{{$iso->customername}}</td>
                                         <td>{{$iso->tgl_outdepo}}</td>

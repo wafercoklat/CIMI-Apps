@@ -7,7 +7,7 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="row">
                         <h3 class="card-title">Duplicate Penjadwalan Isotank</h3>
-                        <h3>Partai {{$iso[0]->partai + 1}} / {{$iso[0]->jlh_Partai}}</h3>
+                        <h3>Partai  {{$iso[0]->partai + 1}} / @if ($iso[0]->partai + 1 > $iso[0]->jlh_Partai) {{$iso[0]->partai + 1}}  @else {{$iso[0]->jlh_Partai}} @endif</h3>
                         <form id="add-isotank_" action="{{ route('isotank.store') }}" method="POST"> 
                             @csrf
                             <div class="col-xl-12 mb-30">
@@ -18,13 +18,13 @@
                                                 <h4 class="card-title">No. Packing List*</h4>
                                                 <input type="text" hidden name="nopartai" value="{{$iso[0]->partai + 1}}">
                                                 <input type="text" hidden name="PL" value="{{$iso[0]->packinglist_no}}">
-                                                <input type="text" hidden name="jlhpartai" value="{{$iso[0]->jlh_Partai}}">
+                                                <input type="text" hidden name="jlhpartai" value="@if ($iso[0]->partai + 1 > $iso[0]->jlh_Partai) {{$iso[0]->partai + 1}}  @else {{$iso[0]->jlh_Partai}} @endif">
                                                 <input type="text" hidden name="customer" value="{{$iso[0]->cust_id}}">
                                                 <input type="text" class="form-control fix1" id="exampleSelectGender" value="{{$iso[0]->packinglist_no}}" disabled/>
                                             </div>
                                             <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                                 <h4 class="card-title">Jumlah Partai</h4>
-                                                <input type="text" class="form-control fix1" id="exampleSelectGender" value="{{$iso[0]->jlh_Partai}}" disabled/>
+                                                <input type="text" class="form-control fix1" id="exampleSelectGender" value="@if ($iso[0]->partai + 1 > $iso[0]->jlh_Partai) {{$iso[0]->partai + 1}}  @else {{$iso[0]->jlh_Partai}} @endif" disabled/>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -53,7 +53,7 @@
                                                         </select>     
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 col-md-12 col-sm-12" id="btn-cl"> <button type="button" id="checkISO_" class="btn btn-primary me-2">Check</button> </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12" id="btn-cl"> <button type="button" id="checkISO_" class="btn btn-primary me-2" hidden></button> </div>
                                             </div>
                                             <div class="col-lg-9 col-md-12 col-sm-12 ml-4">
                                                 <h5 class="card-title">Isi Detail</h5>
@@ -102,23 +102,23 @@
                                                     <div class="row col-lg-12 col-md-12 col-sm-12 mr-2 ">
                                                     <div class="form-group col-lg-3 "> 
                                                         <label for="exampleInputName1 ">Tanggal Muat / Loading</label> 
-                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_muat}}"  id="exampleInputName1" name="tgl_muat">
+                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_muat}}"  id="limitdupisotank1" name="tgl_muat">
                                                     </div>
                                                     <div class="form-group col-lg-3">
                                                         <label for="exampleInputName1">Tanggal ETD</label>
-                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_ETD}}"  id="exampleInputName1"  name="tgl_etd">
+                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_ETD}}"  id="limitdupisotank2"  name="tgl_etd">
                                                     </div>
                                                     <div class="form-group col-lg-3">
                                                         <label for="exampleInputName1">Tanggal ETA</label>
-                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_ETA}}"  id="exampleInputName1"  name="tgl_eta">
+                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_ETA}}"  id="limitdupisotank3"  name="tgl_eta">
                                                     </div>
                                                     <div class="form-group col-lg-3">
                                                         <label for="exampleInputName1">Tanggal Bongkar / Dooring</label>
-                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_bongkar}}"  id="exampleInputName1"  name="tgl_bongkar">
+                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_bongkar}}"  id="limitdupisotank5"  name="tgl_bongkar">
                                                     </div>
                                                     <div class="form-group col-lg-3">
                                                         <label for="exampleInputName1">Tanggal InDepo</label>
-                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_indepo_real}}"  id="exampleInputName1"  name="tgl_indepo_real">
+                                                        <input type="date" class="form-control fix1" value="{{$iso[0]->tgl_indepo_real}}"  id="limitdupisotank6"  name="tgl_indepo_real">
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,14 +130,18 @@
                     <div class="card mt-2">
                         <div class="card-body row">
                             <div class="col-lg-4 col-md-12 col-sm-12">
-                                <label>Apakah ada yakin untuk men-duplicate data ini? </label>
-                                <span class="card-description">Gandakan Jadwal Ini Untuk Partai {{$iso[0]->partai + 2}}?</span>
-                                <input type="checkbox" class="form-check-input" name="duplicate">                                            
-                                          <i class="input-helper"></i></label>
+                                @if (($iso[0]->partai + 2) <= $iso[0]->partai)
+                                    <label>Apakah ada yakin untuk men-duplicate data ini? </label>
+                                    <span class="card-description">Gandakan Jadwal Ini Untuk Partai {{$iso[0]->partai + 2}}?</span>
+                                    <input type="checkbox" class="form-check-input" name="duplicate">                                            
+                                            <i class="input-helper"></i></label>
+                                @else
+                                    <label>Apakah ada yakin untuk mensubmit data ini? </label>
+                                @endif
                             </div>
 
                             <div class="col-lg-4 col-md-12 col-sm-12">
-                                <button type="submit" class="btn btn-primary me-2">Duplicate Data</button>
+                                <button type="submit" class="btn btn-primary me-2">@if (($iso[0]->partai + 2) <= $iso[0]->partai) Duplicate Data @else Submit Data @endif</button>
                                 <a href="{{ url()->previous() }}" class="btn btn-light">Batal</a>
                             </div>
                         </div>
